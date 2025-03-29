@@ -1,0 +1,129 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.idle_mandibles": {
+			"loop": true,
+			"animation_length": 7.0417,
+			"bones": {
+				"left mandible": {
+					"rotation": {
+						"1.4167": {
+							"vector": [0, -22.5, 0]
+						},
+						"1.5417": {
+							"vector": [0, -5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"1.6667": {
+							"vector": [0, -15, 0],
+							"easing": "easeInOutExpo"
+						},
+						"1.7917": {
+							"vector": [0, -5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"1.9167": {
+							"vector": [0, -22.5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.0": {
+							"vector": [0, -22.5, 0]
+						},
+						"4.125": {
+							"vector": [0, -5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.25": {
+							"vector": [0, -15, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.375": {
+							"vector": [0, -5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.5": {
+							"vector": [0, -22.5, 0],
+							"easing": "easeInOutExpo"
+						}
+					}
+				},
+				"right mandible": {
+					"rotation": {
+						"1.4167": {
+							"vector": [0, 22.5, 0]
+						},
+						"1.5417": {
+							"vector": [0, 5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"1.6667": {
+							"vector": [0, 15, 0],
+							"easing": "easeInOutExpo"
+						},
+						"1.7917": {
+							"vector": [0, 5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"1.9167": {
+							"vector": [0, 22.5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.0": {
+							"vector": [0, 22.5, 0]
+						},
+						"4.125": {
+							"vector": [0, 5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.25": {
+							"vector": [0, 15, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.375": {
+							"vector": [0, 5, 0],
+							"easing": "easeInOutExpo"
+						},
+						"4.5": {
+							"vector": [0, 22.5, 0],
+							"easing": "easeInOutExpo"
+						}
+					}
+				}
+			}
+		},
+		"animation.model.idle": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": ["90*(query.is_attached_to_entity-1)", 0, 0]
+					},
+					"position": {
+						"vector": [0, "1*(1-query.is_attached_to_entity)", 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": ["easeInOutCubic", "easeInOutCubic", "easeInOutCubic"]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["easeInOutCubic", "easeInOutCubic", "easeInOutCubic"]
+					}
+				},
+				"left mandible": {
+					"rotation": {
+						"vector": [0, "2*math.sin(query.anim_time * 100)", 0]
+					}
+				},
+				"right mandible": {
+					"rotation": {
+						"vector": [0, "2*math.sin(100+query.anim_time * 103)", 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
