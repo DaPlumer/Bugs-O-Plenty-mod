@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "more_bugs:block/grown_farm",
-		"particle": "more_bugs:item/leafcutter_shroom"
+		"0": "more_bugs:block/leafy_farm",
+		"particle": "more_bugs:block/leafy_farm"
 	},
 	"elements": [
 		{

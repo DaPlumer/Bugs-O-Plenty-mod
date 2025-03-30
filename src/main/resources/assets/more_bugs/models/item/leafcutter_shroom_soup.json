@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "more_bugs:item/leafcutter_shroom_soup"
+  }
+}
