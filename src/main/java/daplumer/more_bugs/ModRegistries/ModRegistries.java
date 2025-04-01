@@ -1,70 +1,60 @@
 package daplumer.more_bugs.ModRegistries;
 
-import com.google.common.base.Supplier;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.loot.LootTable;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- * This is a wrapper class for the {@link ModRegistriesClass} to merge all data registration into two files. Find more information there.
- * @see ModRegistriesClass
+ * This is a wrapper class for the {@link GeneralModDataRegisterer} to merge all data registration into two files. Find more information there.
+ * @see GeneralModDataRegisterer
  * @see Registry
  */
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
-public enum ModRegistries {
+public abstract class ModRegistries{
+    static Logger CUSTOM_DATA_REGISTERER = Logger.getLogger("custom_data_registerer");
+    public Logger LOGGER;
+    private String namespace;
+    public String getNamespace(){
+         if(Objects.isNull(namespace)){
+             String modId = this.getClass().getName();
+             modId = modId.toLowerCase();
+             modId = modId.replace(' ', '-');
+             CUSTOM_DATA_REGISTERER.log(Level.SEVERE,("No Namespace Registered to Mod Initializer "+this.getClass().getName()+", using defaulted namespace " + modId));
+             namespace = modId;
+         }
+        return namespace;
+    }
+    public ModDataRegisterer<Item,Item.Settings> ITEMS = generalRegisterer(Registries.ITEM, Item.Settings::registryKey, Item::new, Item.Settings::new);
+    public ModDataRegisterer<Block,AbstractBlock.Settings> BLOCKS = generalRegisterer(Registries.BLOCK, Block.Settings::registryKey, Block::new, AbstractBlock.Settings::create);
+    public ModDataRegisterer<ItemGroup,ItemGroup.Builder> ITEM_GROUPS = generalRegisterer(Registries.ITEM_GROUP, ((builder, key) -> builder), ItemGroup.Builder::build, FabricItemGroup::builder);
+    public ModDataRegisterer<RegistryKey<LootTable>,RegistryKey<LootTable>> LOOT_TABLES = new ModLootTableRegisterer(this.getNamespace());
 
-    ITEM(Registries.ITEM, Item.Settings::registryKey, Item::new, Item.Settings::new),
-    BLOCK(Registries.BLOCK, Block.Settings::registryKey, Block::new, Block.Settings::create),
-    ITEM_GROUP(Registries.ITEM_GROUP, (builder, key) -> builder, ItemGroup.Builder::build, FabricItemGroup::builder);
 
-    /**
-     * the initializer for an instance of a data registration tool
-     */
-    private final ModRegistriesClass classInstance;
-    <T,S>ModRegistries(Registry<T> registry, BiFunction<S, RegistryKey<T>, S> settingsFactory, Function<S,T> defaultDataFactory, Supplier<S> defaultSettingsFactory){
-        this.classInstance = new ModRegistriesClass(registry,settingsFactory,defaultDataFactory,defaultSettingsFactory);
+    public <T,S> GeneralModDataRegisterer<T,S> generalRegisterer(Registry registry, BiFunction<S,RegistryKey<T>,S> registryKeySettingsFactory, Function<S,T> defaultInstanceFactory, Supplier defaultSettingsFactory){
+        return new GeneralModDataRegisterer<T,S>(registry,this.getNamespace(), registryKeySettingsFactory, defaultInstanceFactory, defaultSettingsFactory);
     }
 
     /**
-     * generate an instance of data with a custom {@code name}, {@code settings}, and {@code dataFactory}.
-     * for more implementation information, see {@link ModRegistriesClass#register(String, Object, Function) register}
-     * in {@link ModRegistriesClass}.
-     * @see ModRegistriesClass
-     * @see ModRegistriesClass#register(String, Object, Function) register
-     * @see Registries
+     * Given a registered block, this function returns a function which makes a block item from the given block.
+     * this is my first ever curry!
+     *
+     * @see BlockItem
      */
-    public <T,S> T register(@NotNull String name, @Nullable S instanceSettings, @Nullable Function<S,T> dataFactory){
-        return (T) this.classInstance.register(name,instanceSettings,dataFactory);
+    public static Function<Item.Settings, Item> BLOCK_ITEM(Block block) {
+        return (settings -> new BlockItem(block, settings));
     }
 
-    /**
-     * generate an instance of data with a custom {@code name} and {@code settings} using the default {@code dataFactory}.
-     * for more implementation information, see {@link ModRegistriesClass#register(String, Object, Function) register}
-     * in {@link ModRegistriesClass}.
-     * @see ModRegistriesClass
-     * @see ModRegistriesClass#register(String, Object, Function) register
-     * @see Registries
-     */
-    public <T,S> T register(String name, @Nullable S instanceSettings){
-        return register(name,instanceSettings, null);
-    }
-    /**
-     * generate an instance of data with a custom {@code name} and the default {@code settings} and {@code dataFactory}.
-     * for more implementation information, see {@link ModRegistriesClass#register(String, Object, Function) register}
-     * in {@link ModRegistriesClass}.
-     * @see ModRegistriesClass
-     * @see ModRegistriesClass#register(String, Object, Function) register
-     * @see Registries
-     */
-    public <T> T register(String name){
-        return register(name, null, null);
-    }
 }

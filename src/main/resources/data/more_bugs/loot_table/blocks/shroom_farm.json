@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:block_use",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": {
+        "type": "minecraft:binomial",
+        "n": 1,
+        "p": 0.25
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:acacia_button"
+        }
+      ],
+      "functions": [],
+      "conditions": []
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:apply_bonus",
+      "enchantment": "minecraft:fortune",
+      "formula": "minecraft:binomial_with_bonus_count",
+      "parameters": {
+        "extra": 0,
+        "probability": 0.25
+      },
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "more_bugs:shroom_farm",
+          "properties": {
+            "fill_level": 2
+          }
+        }
+      ]
+    }
+  ],
+  "random_sequence": "213219"
+}
