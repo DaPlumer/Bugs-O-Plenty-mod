@@ -27,16 +27,7 @@ public abstract class ModRegistries{
     static Logger CUSTOM_DATA_REGISTERER = Logger.getLogger("custom_data_registerer");
     public Logger LOGGER;
     private String namespace;
-    public String getNamespace(){
-         if(Objects.isNull(namespace)){
-             String modId = this.getClass().getName();
-             modId = modId.toLowerCase();
-             modId = modId.replace(' ', '-');
-             CUSTOM_DATA_REGISTERER.log(Level.SEVERE,("No Namespace Registered to Mod Initializer "+this.getClass().getName()+", using defaulted namespace " + modId));
-             namespace = modId;
-         }
-        return namespace;
-    }
+    public abstract String getNamespace();
     public ModDataRegisterer<Item,Item.Settings> ITEMS = generalRegisterer(Registries.ITEM, Item.Settings::registryKey, Item::new, Item.Settings::new);
     public ModDataRegisterer<Block,AbstractBlock.Settings> BLOCKS = generalRegisterer(Registries.BLOCK, Block.Settings::registryKey, Block::new, AbstractBlock.Settings::create);
     public ModDataRegisterer<ItemGroup,ItemGroup.Builder> ITEM_GROUPS = generalRegisterer(Registries.ITEM_GROUP, ((builder, key) -> builder), ItemGroup.Builder::build, FabricItemGroup::builder);
