@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"all": "more_bugs:block/budding_farm"
+		"all": "more_bugs:block/empty_farm"
 	}
 }

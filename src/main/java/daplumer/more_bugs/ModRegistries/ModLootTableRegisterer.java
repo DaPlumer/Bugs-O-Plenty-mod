@@ -16,6 +16,7 @@ public class ModLootTableRegisterer implements ModDataRegisterer<RegistryKey<Loo
     public String getNameSpace() {
         return namespace;
     }
+
     ModLootTableRegisterer(String namespace){
         this.namespace = namespace;
     }

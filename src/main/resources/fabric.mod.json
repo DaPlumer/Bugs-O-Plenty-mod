@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "more-bugs",
+	"id": "more_bugs",
 	"version": "${version}",
 	"name": "Bugs 'o plenty",
 	"description": "adding bugs to minecraft",

@@ -6,8 +6,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.StatFormatter;
-import net.minecraft.stat.StatType;
-import net.minecraft.text.Text;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,13 +16,13 @@ import java.util.function.Function;
 
 import static net.minecraft.stat.Stats.CUSTOM;
 
-public class StatTypeRegisterer implements ModDataRegisterer<Identifier, StatFormatter>{
+public class ModStatTypeRegisterer implements ModDataRegisterer<Stat<Identifier>, StatFormatter>{
     private final String namespace;
     @Override
     public String getNameSpace() {
         return this.namespace;
     }
-    StatTypeRegisterer(String namespace){
+    ModStatTypeRegisterer(String namespace){
         this.namespace = namespace;
     }
     /**
@@ -39,11 +38,10 @@ public class StatTypeRegisterer implements ModDataRegisterer<Identifier, StatFor
      * @see Registries
      */
     @Override
-    public Identifier register(@NotNull String name, @Nullable StatFormatter instanceSettings, @Nullable Function<StatFormatter, Identifier> instanceFactory) {
+    public Stat<Identifier> register(@NotNull String name, @Nullable StatFormatter instanceSettings, @Nullable Function<StatFormatter, Stat<Identifier>> instanceFactory) {
         Identifier identifier = getIdentifier(name);
         Registry.register(Registries.CUSTOM_STAT, name, identifier);
-        CUSTOM.getOrCreateStat(identifier, Objects.requireNonNullElse(instanceSettings,StatFormatter.DEFAULT));
-        return identifier;
+        return CUSTOM.getOrCreateStat(identifier, Objects.requireNonNullElse(instanceSettings,StatFormatter.DEFAULT));
     }
 
     /**
@@ -52,8 +50,8 @@ public class StatTypeRegisterer implements ModDataRegisterer<Identifier, StatFor
      * @see ModRegistries
      */
     @Override
-    public Identifier getInstance(Identifier identifier) {
-        return Registries.CUSTOM_STAT.get(identifier);
+    public Stat<Identifier> getInstance(Identifier identifier) {
+        return CUSTOM.getOrCreateStat(identifier);
     }
 
     @Override
