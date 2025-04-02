@@ -1,13 +1,11 @@
 package daplumer.more_bugs.ModRegistries;
 
-import daplumer.more_bugs.BugsoPlenty;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
 import java.util.function.Function;
 
 /**

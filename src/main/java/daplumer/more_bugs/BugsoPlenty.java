@@ -1,28 +1,17 @@
 package daplumer.more_bugs;
 
-import daplumer.more_bugs.ModRegistries.ModDataRegisterer;
 import daplumer.more_bugs.ModRegistries.ModRegistries;
 import daplumer.more_bugs.block.ModBlocks;
-import daplumer.more_bugs.block.ShroomFarm;
 import daplumer.more_bugs.util.FoodComponentsBuilder;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
-import net.minecraft.loot.LootTable;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.stat.Stat;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.IntProperty;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.lang.model.type.NullType;
 
 import static daplumer.more_bugs.Registries.*;
 
