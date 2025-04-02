@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "fill_level = 0, leaves = false": {
+      "model": "more_bugs:block/empty_shroom_farm.json"
+    },
+    "fill_level = 1, leaves = false": {
+      "model": "more_bugs:block/budding_shroom_farm.json"
+    },
+    "fill_level = 2, leaves = false": {
+      "model": "more_bugs:block/grown_shroom_farm.json"
+    },
+    "fill_level = 0, leaves = true": {
+      "model": "more_bugs:block/leafy_shroom_farm.json"
+    },
+    "fill_level = 1, leaves = true": {
+      "model": "more_bugs:block/budding_shroom_farm.json"
+    },
+    "fill_level = 2, leaves = true": {
+      "model": "more_bugs:block/grown_shroom_farm.json"
+    }
+  }
+}
