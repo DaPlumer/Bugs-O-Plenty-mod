@@ -14,8 +14,6 @@ import net.minecraft.util.Identifier;
 
 import java.util.function.Function;
 
-import static daplumer.more_bugs.Registries.BLOCKS;
-
 public class ModBlocks {
     public static final Block SHROOM_FARM_BLOCK =
             register("shroom_farm",ShroomFarm::new, AbstractBlock.Settings.copy(Blocks.DIRT), true);
