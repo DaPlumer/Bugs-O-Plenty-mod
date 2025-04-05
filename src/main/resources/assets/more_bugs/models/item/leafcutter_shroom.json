@@ -3,8 +3,8 @@
 	"parent": "leafcutter_shroom",
 	"texture_size": [8, 8],
 	"textures": {
-		"0": "leafcutter_shroom",
-		"particle": "leafcutter_shroom"
+		"0": "more_bugs:item/leafcutter_shroom",
+		"particle": "more_bugs:item/leafcutter_shroom"
 	},
 	"elements": [
 		{

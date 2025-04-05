@@ -1,6 +1,21 @@
 {
-	"parent": "minecraft:block/cube_all",
+	"credit": "Made with Blockbench",
 	"textures": {
-		"all": "more_bugs:block/leafy_farm"
-	}
+		"3": "more_bugs:block/leafy_farm",
+		"particle": "more_bugs:block/leafy_farm"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "down"}
+			}
+		}
+	]
 }

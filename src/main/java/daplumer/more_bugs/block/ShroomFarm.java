@@ -1,6 +1,8 @@
 package daplumer.more_bugs.block;
 
 import com.mojang.serialization.MapCodec;
+import daplumer.more_bugs.BugsoPlenty;
+import daplumer.more_bugs.BugsoPlentyClient;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -51,6 +53,7 @@ public class ShroomFarm extends Block {
             world.setBlockState(pos,state.with(FILL_LEVEL, 0), NOTIFY_ALL_AND_REDRAW);
             world.emitGameEvent(player,GameEvent.SHEAR, pos);
             player.incrementStat(Stats.USED.getOrCreateStat(Items.SHEARS));
+            player.incrementStat(BugsoPlenty.SHEAR_SHROOM_FARM_STAT);
             Direction direction = hit.getSide();
             Direction direction2 = direction.getAxis() == Direction.Axis.Y ? player.getHorizontalFacing().getOpposite() : direction;
             ItemEntity itemEntity = new ItemEntity(
@@ -58,7 +61,7 @@ public class ShroomFarm extends Block {
                     pos.getX() + 0.5 + direction2.getOffsetX() * 0.65,
                     pos.getY() + 0.1,
                     pos.getZ() + 0.5 + direction2.getOffsetZ() * 0.65,
-                    new ItemStack(Items.PUMPKIN_SEEDS, 4)
+                    new ItemStack(BugsoPlenty.LEAFCUTTER_SHROOM_ITEM, (state.get(FILL_LEVEL) == 1)? 1:3)
             );
             itemEntity.setVelocity(
                     0.05 * direction2.getOffsetX() + world.random.nextDouble() * 0.02, 0.05, 0.05 * direction2.getOffsetZ() + world.random.nextDouble() * 0.02
@@ -76,8 +79,18 @@ public class ShroomFarm extends Block {
 
     @Override
     protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        world.setBlockState(pos,state.with(FILL_LEVEL,2),NOTIFY_ALL_AND_REDRAW);
+        this.updateFillLevel(state,world,pos);
         super.randomTick(state, world, pos, random);
+    }
+    private boolean updateFillLevel(BlockState state, ServerWorld world, BlockPos pos){
+        int fill = state.get(FILL_LEVEL);
+        boolean leaves = state.get(LEAVES);
+        if(leaves && fill != 2){
+            world.setBlockState(pos,state.with(FILL_LEVEL,fill + 1).with(LEAVES,false),NOTIFY_ALL_AND_REDRAW);
+            return true;
+        }
+        world.setBlockState(pos,state.with(LEAVES,true),NOTIFY_ALL_AND_REDRAW);
+        return false;
     }
 
     @Override

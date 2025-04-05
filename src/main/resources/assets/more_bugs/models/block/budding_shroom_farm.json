@@ -1,6 +1,21 @@
 {
-	"parent": "minecraft:block/cube_all",
+	"credit": "Made with Blockbench",
 	"textures": {
-		"all": "more_bugs:block/budding_farm"
-	}
+		"1": "more_bugs:block/budding_farm",
+		"particle": "more_bugs:block/budding_farm"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "down"}
+			}
+		}
+	]
 }

@@ -15,25 +15,36 @@ import java.util.function.Function;
 
 import static net.minecraft.stat.Stats.CUSTOM;
 
+/**
+ * This is a class that registers stats for mods
+ * @implNote Use this
+ */
 public class ModStatTypeRegisterer implements ModDataRegisterer<Stat<Identifier>, StatFormatter>{
     private final String namespace;
+
+    /**
+     * @return the namespace of the local mod that is registering the stat.
+     * @see ModDataRegisterer
+     * @see ModStatTypeRegisterer
+     * @see ModRegistries
+     */
     @Override
     public String getNameSpace() {
         return this.namespace;
     }
+
     ModStatTypeRegisterer(String namespace){
         this.namespace = namespace;
     }
+
     /**
-     * generate an instance of data with a custom {@code name}, {@code settings}, and {@code dataFactory}.
-     * for more implementation information, see {@link GeneralModDataRegisterer#register(String, Object, Function) register}
-     * in {@link GeneralModDataRegisterer}.
+     * generate a statistic with a custom {@code name}.
+     * for more information, see {@link ModDataRegisterer#register(String)}
+     * in {@link ModDataRegisterer}.
      *
-     * @param name
-     * @param instanceSettings
-     * @param instanceFactory
-     * @see GeneralModDataRegisterer
-     * @see GeneralModDataRegisterer#register(String, Object, Function) register
+     * @see ModDataRegisterer
+     * @see ModDataRegisterer#register(String)
+     * @see Stat
      * @see Registries
      */
     @Override
@@ -44,8 +55,7 @@ public class ModStatTypeRegisterer implements ModDataRegisterer<Stat<Identifier>
     }
 
     /**
-     * @param identifier
-     * @return an instance of the data identified by the Identifier given
+     * @return an instance of the data identified by the Identifier given. In the instance of the {@link ModStatTypeRegisterer}, this returns a {@link Stat} with an identifier type
      * @see ModRegistries
      */
     @Override
@@ -53,6 +63,11 @@ public class ModStatTypeRegisterer implements ModDataRegisterer<Stat<Identifier>
         return CUSTOM.getOrCreateStat(identifier);
     }
 
+    /**
+     * given an {@link Identifier}, return a registry key
+     * @see ModStatTypeRegisterer
+     * @see #register(String, StatFormatter, Function)
+     */
     @Override
     public RegistryKey<Identifier> getRegistryKey(Identifier identifier) {
         return RegistryKey.of(RegistryKeys.CUSTOM_STAT,identifier);

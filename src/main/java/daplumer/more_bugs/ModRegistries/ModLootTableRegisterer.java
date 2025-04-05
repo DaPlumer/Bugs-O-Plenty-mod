@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
+@SuppressWarnings("unchecked")
 public class ModLootTableRegisterer implements ModDataRegisterer<RegistryKey<LootTable>, RegistryKey<LootTable>> {
     private final String namespace;
     @Override
@@ -20,7 +21,6 @@ public class ModLootTableRegisterer implements ModDataRegisterer<RegistryKey<Loo
     ModLootTableRegisterer(String namespace){
         this.namespace = namespace;
     }
-    @SuppressWarnings("unchecked")
     @Override
     public RegistryKey<LootTable> register(@NotNull String name,@Nullable RegistryKey<LootTable> instanceSettings,@Nullable Function<RegistryKey<LootTable>,@Nullable RegistryKey<LootTable>> instanceFactory) {
         RegistryKey<LootTable> key = getRegistryKey(name);

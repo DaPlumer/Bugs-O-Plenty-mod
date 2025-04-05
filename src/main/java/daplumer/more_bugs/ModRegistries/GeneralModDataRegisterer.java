@@ -11,13 +11,13 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 /**
- * This is a class made to merge all registry methods of different
- * data types to make updating data registration methods easier and centralize data registration.
+ * This is a class made to merge most methods of different
+ * data types to make updating data registration methods easier and centralize data registration methods.
+ * @see daplumer.more_bugs.ModRegistries.ModDataRegisterer ModDataRegisterer
  * @see ModRegistries
  * @see #register(String, Object, Function)
  * @see Registry
  */
-
 public class GeneralModDataRegisterer<T, S> implements ModDataRegisterer<T,S> {
     public final String namespace;
     public final Registry<T> registry;
@@ -40,7 +40,12 @@ public class GeneralModDataRegisterer<T, S> implements ModDataRegisterer<T,S> {
         this.defaultDataFactory = defaultInstanceFactory;//This lambda function creates an instance of the data using settings provided
         this.defaultSettingsFactory = defaultSettingsFactory;//This lambda function supplies the default settings when a parameter is ignored
     }
-
+    /**
+     * @return the namespace of the local mod that is registering the stat.
+     * @see ModDataRegisterer
+     * @see ModStatTypeRegisterer
+     * @see ModRegistries
+     */
     @Override
     public String getNameSpace() {
         return this.namespace;

@@ -1,11 +1,14 @@
 package daplumer.more_bugs;
 
 import daplumer.more_bugs.ModRegistries.ModRegistries;
-import daplumer.more_bugs.block.ModBlocks;
+import daplumer.more_bugs.block.ShroomFarm;
 import daplumer.more_bugs.util.FoodComponentsBuilder;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.stat.Stat;
 import net.minecraft.text.Text;
@@ -35,8 +38,15 @@ public class BugsoPlenty extends ModRegistries implements ModInitializer{
 							.useRemainder(Items.BOWL)
 							.maxCount(1)
 			);
+
 	public static final Stat<Identifier> SHEAR_SHROOM_FARM_STAT =
 			STATS.register("shear_shroom_farm");
+
+	public static final Block SHROOM_FARM_BLOCK =
+			BLOCKS.register("shroom_farm",AbstractBlock.Settings.copy(Blocks.DIRT), ShroomFarm::new);
+
+	public static final BlockItem SHROOM_FARM_BLOCK_ITEM =
+            (BlockItem) ITEMS.register("shroom_farm",new Item.Settings(), BLOCK_ITEM(SHROOM_FARM_BLOCK));
 
 	public static final ItemGroup BUGS_O_PLENTY_ITEM_GROUP =
 			ITEM_GROUPS.register("bugs_o_plenty",
@@ -46,17 +56,13 @@ public class BugsoPlenty extends ModRegistries implements ModInitializer{
 							.entries(((displayContext, entries) -> {
 								entries.add(LEAFCUTTER_SHROOM_ITEM);
 								entries.add(LEAFCUTTER_SHROOM_SOUP_ITEM);
-								entries.add(ModBlocks.SHROOM_FARM_BLOCK);
+								entries.add(SHROOM_FARM_BLOCK_ITEM);
 							}))
 			);
-	@Override
+ 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
 		LOGGER.info("Registering Mod " + NAME);
 		Registries.Initialize();
-		ModBlocks.initialize();
 	}
 
 

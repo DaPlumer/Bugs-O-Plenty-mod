@@ -28,26 +28,18 @@ import java.util.logging.Logger;
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 public abstract class ModRegistries{
     static Logger CUSTOM_DATA_REGISTERER = Logger.getLogger("custom_data_registerer");
-    public abstract String getNamespace();
-    protected static final Function<String, ModDataRegisterer<Item,Item.Settings>> LOCAL_ITEMS = (string) -> new GeneralModDataRegisterer<Item,Item.Settings>(Registries.ITEM,string, Item.Settings::registryKey, Item::new, Item.Settings::new);
-    protected static final Function<String, ModDataRegisterer<Block,AbstractBlock.Settings>> LOCAL_BLOCKS = (string) -> new GeneralModDataRegisterer<Block,Block.Settings>(Registries.BLOCK,string, (AbstractBlock.Settings::registryKey), Block::new, AbstractBlock.Settings::create);
-    protected static final Function<String, ModDataRegisterer<ItemGroup,ItemGroup.Builder>> LOCAL_ITEM_GROUPS = (string) -> new GeneralModDataRegisterer<ItemGroup,ItemGroup.Builder>(Registries.ITEM_GROUP,string, (builder, itemGroupRegistryKey) -> builder, ItemGroup.Builder::build, FabricItemGroup::builder);
-    protected static final Function<String, ModDataRegisterer<RegistryKey<LootTable>,RegistryKey<LootTable>>> LOCAL_LOOT_TABLES = ModLootTableRegisterer::new;
-    protected static final Function<String, ModDataRegisterer<Stat<Identifier>, StatFormatter>> LOCAL_STATS = ModStatTypeRegisterer::new;
+
+    protected static final Function<String, ModDataRegisterer<Item, Item.Settings>>                           ITEM_REGISTERER_CONSTRUCTOR       = generalRegisterer(Registries.ITEM,       Item.Settings::registryKey, Item::new, Item.Settings::new);
+    protected static final Function<String, ModDataRegisterer<Block, Block.Settings>>                         BLOCK_REGISTERER_CONSTRUCTOR      = generalRegisterer(Registries.BLOCK,      AbstractBlock.Settings::registryKey, Block::new, AbstractBlock.Settings::create);
+    protected static final Function<String, ModDataRegisterer<ItemGroup, ItemGroup.Builder>>                  ITEM_GROUP_REGISTERER_CONSTRUCTOR = generalRegisterer(Registries.ITEM_GROUP, (builder, itemGroupRegistryKey) -> builder, ItemGroup.Builder::build, FabricItemGroup::builder);
+    protected static final Function<String, ModDataRegisterer<RegistryKey<LootTable>,RegistryKey<LootTable>>> LOOT_TABLE_REGISTERER_CONSTRUCTOR = ModLootTableRegisterer::new;
+    protected static final Function<String, ModDataRegisterer<Stat<Identifier>, StatFormatter>>               STAT_REGISTERER_CONSTRUCTOR       = ModStatTypeRegisterer::new;
 
 
-    private  <T,S> GeneralModDataRegisterer<T,S> generalRegisterer(Registry registry, BiFunction<S,RegistryKey<T>,S> registryKeySettingsFactory, Function<S,T> defaultInstanceFactory, Supplier defaultSettingsFactory){
-        return new GeneralModDataRegisterer<T,S>(registry,this.getNamespace(), registryKeySettingsFactory, defaultInstanceFactory, defaultSettingsFactory);
+    private static <T,S> Function<String, ModDataRegisterer<T,S>> generalRegisterer(Registry registry, BiFunction<S, RegistryKey<T>, S> registryKeySettingsFactory, Function<S, T> defaultInstanceFactory, Supplier defaultSettingsFactory){
+        return (string) -> new GeneralModDataRegisterer<>(registry,string, registryKeySettingsFactory, defaultInstanceFactory, defaultSettingsFactory);
     }
 
-    /**
-     * Given a registered block, this function returns a function which makes a block item from the given block.
-     * this is my first ever curry!
-     *
-     * @see BlockItem
-     */
-    public static Function<Item.Settings, Item> BLOCK_ITEM(Block block) {
-        return (settings -> new BlockItem(block, settings));
-    }
+
 
 }
