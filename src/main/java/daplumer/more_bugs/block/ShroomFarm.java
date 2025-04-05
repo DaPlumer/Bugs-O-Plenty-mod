@@ -9,7 +9,6 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -26,6 +25,13 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.item.BlockItem;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
 
 public class ShroomFarm extends Block {
 
@@ -36,6 +42,8 @@ public class ShroomFarm extends Block {
         super(settings);
         setDefaultState(getDefaultState().with(FILL_LEVEL,0).with(LEAVES,false));
     }
+    private static final TagKey<Item> SHEARS_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("c:tools/shears"));
+    private static final TagKey<Item> LEAVES_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("minecraft:leaves"));
 
     @Override
     protected MapCodec<? extends Block> getCodec() {
@@ -45,30 +53,44 @@ public class ShroomFarm extends Block {
     @Override
     protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int fill_level = state.get(FILL_LEVEL);
-        if(stack.isOf(Items.SHEARS) & fill_level > 0){
+        if(stack.isIn(LEAVES_TAG) &! state.get(LEAVES)){
+            // get the sound associated with the item held or default it to oak leaves breaking
+            SoundEvent sound = Blocks.OAK_LEAVES.getDefaultState().getSoundGroup().getBreakSound();
+            if (stack.getItem() instanceof BlockItem _blockItem) sound = _blockItem.getBlock().getDefaultState().getSoundGroup().getBreakSound();
+
+            world.playSoundAtBlockCenter(pos,sound, SoundCategory.BLOCKS,1,1,true);
+            world.setBlockState(pos, state.with(LEAVES, true), NOTIFY_ALL_AND_REDRAW);
+            player.incrementStat(BugsoPlenty.FILL_SHROOM_FARM_STAT);
+            stack.decrementUnlessCreative(1, player);
+            return ActionResult.SUCCESS;
+        }
+        if(stack.isIn(SHEARS_TAG) & fill_level > 0){
+            //copy of the pumpkin shearing script with some modifications
             if (player instanceof ServerPlayerEntity serverPlayerEntity) Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayerEntity, pos, stack);
             world.playSoundAtBlockCenter(pos, SoundEvents.ENTITY_BOGGED_SHEAR, SoundCategory.BLOCKS, 1,1,true);
             stack.damage(1,player, LivingEntity.getSlotForHand(hand));
             world.setBlockState(pos,state.with(FILL_LEVEL, 0), NOTIFY_ALL_AND_REDRAW);
             world.emitGameEvent(player,GameEvent.SHEAR, pos);
-            player.incrementStat(Stats.USED.getOrCreateStat(Items.SHEARS));
+            player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
             player.incrementStat(BugsoPlenty.SHEAR_SHROOM_FARM_STAT);
-            Direction direction = hit.getSide();
-            Direction direction2 = direction.getAxis() == Direction.Axis.Y ? player.getHorizontalFacing().getOpposite() : direction;
+            Direction direction = player.getFacing().getOpposite();
             ItemEntity itemEntity = new ItemEntity(
                     world,
-                    pos.getX() + 0.5 + direction2.getOffsetX() * 0.65,
+                    pos.getX() + 0.5 + direction.getOffsetX() * 0.65,
                     pos.getY() + 0.1,
-                    pos.getZ() + 0.5 + direction2.getOffsetZ() * 0.65,
+                    pos.getZ() + 0.5 + direction.getOffsetZ() * 0.65,
                     new ItemStack(BugsoPlenty.LEAFCUTTER_SHROOM_ITEM, (state.get(FILL_LEVEL) == 1)? 1:3)
             );
             itemEntity.setVelocity(
-                    0.05 * direction2.getOffsetX() + world.random.nextDouble() * 0.02, 0.05, 0.05 * direction2.getOffsetZ() + world.random.nextDouble() * 0.02
+                    0.05 * direction.getOffsetX() + world.random.nextDouble() * 0.02,
+                    0.05 * direction.getOffsetY() + world.random.nextDouble() * 0.02,
+                    0.05 * direction.getOffsetZ() + world.random.nextDouble() * 0.02
             );
             world.spawnEntity(itemEntity);
+            return ActionResult.SUCCESS;
         }
 
-        return ActionResult.FAIL;
+        return ActionResult.PASS;
     }
 
     @Override
@@ -87,7 +109,6 @@ public class ShroomFarm extends Block {
         if(leaves && fill != 2){
             world.setBlockState(pos,state.with(FILL_LEVEL,fill + 1).with(LEAVES,false),NOTIFY_ALL_AND_REDRAW);
         }
-        world.setBlockState(pos,state.with(LEAVES,true),NOTIFY_ALL_AND_REDRAW);
     }
 
     @Override

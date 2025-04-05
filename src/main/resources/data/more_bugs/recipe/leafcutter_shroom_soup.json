@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LSL",
+    "SSS",
+    " B "
+  ],
+  "key": {
+    "B": "minecraft:bowl",
+    "S": [
+      "minecraft:red_mushroom",
+      "minecraft:brown_mushroom"
+    ],
+    "L": "more_bugs:leafcutter_shroom"
+  },
+  "result": {
+    "id": "more_bugs:leafcutter_shroom_soup"
+  }
+}

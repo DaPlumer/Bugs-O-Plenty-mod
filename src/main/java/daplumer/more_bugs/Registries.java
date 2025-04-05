@@ -14,14 +14,14 @@ import net.minecraft.util.Identifier;
 
 import java.util.function.Function;
 
-@SuppressWarnings("unused")
-public class Registries extends ModRegistries {
+@SuppressWarnings({"unused", "SameParameterValue"})
+class Registries extends ModRegistries {
     /**
      * the namespace used for the mod being registered. Make sure to initialize this variable to your MOD_ID
      * @see ModRegistries
      * @see ModDataRegisterer
      */
-    public static final String namespace = "more_bugs";
+    static final String namespace = "more_bugs";
     /**
      * The general registerer for item creation. Member of the {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
      * @implNote Documentation on general data registration can be found in the
@@ -35,7 +35,7 @@ public class Registries extends ModRegistries {
      * @see ModRegistries
      * @see ModRegistries#ITEM_REGISTERER_CONSTRUCTOR
      */
-    public static final ModDataRegisterer<Item, Item.Settings>                           ITEMS =       ITEM_REGISTERER_CONSTRUCTOR.      apply(namespace);
+    static final ModDataRegisterer<Item, Item.Settings>                           ITEMS =       ITEM_REGISTERER_CONSTRUCTOR.      apply(namespace);
     /**
      * The general registerer for block creation. Member of the {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
      * @implNote Documentation on general data registration can be found in the
@@ -49,7 +49,7 @@ public class Registries extends ModRegistries {
      * @see ModRegistries
      * @see ModRegistries#BLOCK_REGISTERER_CONSTRUCTOR
      */
-    public static final ModDataRegisterer<Block, Block.Settings>                         BLOCKS =      BLOCK_REGISTERER_CONSTRUCTOR.     apply(namespace);
+    static final ModDataRegisterer<Block, Block.Settings>                         BLOCKS =      BLOCK_REGISTERER_CONSTRUCTOR.     apply(namespace);
     /**
      * The general registerer for item group creation. Member of the {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
      * @implNote Documentation on general data registration can be found in the
@@ -63,11 +63,11 @@ public class Registries extends ModRegistries {
      * @see ModRegistries
      * @see ModRegistries#ITEM_GROUP_REGISTERER_CONSTRUCTOR
      */
-    public static final ModDataRegisterer<ItemGroup, ItemGroup.Builder>                  ITEM_GROUPS = ITEM_GROUP_REGISTERER_CONSTRUCTOR.apply(namespace);
+    static final ModDataRegisterer<ItemGroup, ItemGroup.Builder>                  ITEM_GROUPS = ITEM_GROUP_REGISTERER_CONSTRUCTOR.apply(namespace);
     /**
      * WIP DO NOT USE!
      */
-    public static final ModDataRegisterer<RegistryKey<LootTable>,RegistryKey<LootTable>> LOOT_TABLES = LOOT_TABLE_REGISTERER_CONSTRUCTOR.apply(namespace);
+    static final ModDataRegisterer<RegistryKey<LootTable>,RegistryKey<LootTable>> LOOT_TABLES = LOOT_TABLE_REGISTERER_CONSTRUCTOR.apply(namespace);
     /**
      * Mod registerer for statistic registration
      * @implNote see {@link daplumer.more_bugs.ModRegistries.ModStatTypeRegisterer ModStatTypeRegisterer} for implementation information.
@@ -78,7 +78,7 @@ public class Registries extends ModRegistries {
      * @see ModRegistries#STAT_REGISTERER_CONSTRUCTOR
      *
      */
-    public static final ModDataRegisterer<Stat<Identifier>, StatFormatter>               STATS =       STAT_REGISTERER_CONSTRUCTOR.      apply(namespace);
+    static final ModDataRegisterer<Stat<Identifier>, StatFormatter>               STATS =       STAT_REGISTERER_CONSTRUCTOR.      apply(namespace);
 
 
     /**
@@ -106,7 +106,7 @@ public class Registries extends ModRegistries {
      * @see ModDataRegisterer
      * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
      */
-    public static Function<Item.Settings, Item> BLOCK_ITEM(Block block) {
+    static Function<Item.Settings, Item> BLOCK_ITEM(Block block) {
         return (settings -> new BlockItem(block, settings));
     }
 
@@ -117,6 +117,6 @@ public class Registries extends ModRegistries {
      * @see ModDataRegisterer
      * @see ModRegistries
      */
-    public static void Initialize(){
+    static void Initialize(){
     }
 }

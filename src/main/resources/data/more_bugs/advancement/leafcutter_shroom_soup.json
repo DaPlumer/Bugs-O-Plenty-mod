@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "shear_farm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "more_bugs:leafcutter_shroom"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "more_bugs:leafcutter_shroom_soup"
+    ]
+  }
+}

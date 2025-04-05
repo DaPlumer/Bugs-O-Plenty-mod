@@ -42,6 +42,9 @@ public class BugsoPlenty extends ModRegistries implements ModInitializer{
 	public static final Stat<Identifier> SHEAR_SHROOM_FARM_STAT =
 			STATS.register("shear_shroom_farm");
 
+	public static final Stat<Identifier> FILL_SHROOM_FARM_STAT =
+			STATS.register("fill_shroom_farm");
+
 	public static final Block SHROOM_FARM_BLOCK =
 			BLOCKS.register("shroom_farm",AbstractBlock.Settings.copy(Blocks.DIRT), ShroomFarm::new);
 
