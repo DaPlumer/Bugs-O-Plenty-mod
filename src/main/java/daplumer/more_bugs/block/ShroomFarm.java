@@ -2,7 +2,6 @@ package daplumer.more_bugs.block;
 
 import com.mojang.serialization.MapCodec;
 import daplumer.more_bugs.BugsoPlenty;
-import daplumer.more_bugs.BugsoPlentyClient;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -82,15 +81,13 @@ public class ShroomFarm extends Block {
         this.updateFillLevel(state,world,pos);
         super.randomTick(state, world, pos, random);
     }
-    private boolean updateFillLevel(BlockState state, ServerWorld world, BlockPos pos){
+    private void updateFillLevel(BlockState state, ServerWorld world, BlockPos pos){
         int fill = state.get(FILL_LEVEL);
         boolean leaves = state.get(LEAVES);
         if(leaves && fill != 2){
             world.setBlockState(pos,state.with(FILL_LEVEL,fill + 1).with(LEAVES,false),NOTIFY_ALL_AND_REDRAW);
-            return true;
         }
         world.setBlockState(pos,state.with(LEAVES,true),NOTIFY_ALL_AND_REDRAW);
-        return false;
     }
 
     @Override

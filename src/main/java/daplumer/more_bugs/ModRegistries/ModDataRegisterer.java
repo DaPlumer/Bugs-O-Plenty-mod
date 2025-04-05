@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
-
+@SuppressWarnings("unused")
 public interface ModDataRegisterer<T,S> {
     String getNameSpace();
     T register(@NotNull String name,@Nullable S instanceSettings,@Nullable Function<S,T> instanceFactory);
@@ -14,6 +14,7 @@ public interface ModDataRegisterer<T,S> {
     default Identifier getIdentifier(@NotNull String name) {
         return Identifier.of(getNameSpace(), name);
     }
+
     default T getInstance(String name){
         return getInstance(getIdentifier(name));
     }

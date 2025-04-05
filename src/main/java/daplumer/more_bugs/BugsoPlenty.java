@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import static daplumer.more_bugs.Registries.*;
 
-@SuppressWarnings({"StringTemplateMigration", "RedundantSuppression"})
+@SuppressWarnings("unused")
 public class BugsoPlenty extends ModRegistries implements ModInitializer{
 	public static final String MOD_ID = "more_bugs";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
