@@ -1,6 +1,6 @@
 package daplumer.more_bugs;
 
-import daplumer.more_bugs.ModRegistries.ModRegistries;
+import daplumer.modregisterer.ModRegistries.ModRegistries;
 import daplumer.more_bugs.block.ShroomFarm;
 import daplumer.more_bugs.util.FoodComponentsBuilder;
 import net.fabricmc.api.ModInitializer;

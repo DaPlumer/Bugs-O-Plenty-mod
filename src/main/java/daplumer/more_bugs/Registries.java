@@ -1,7 +1,7 @@
 package daplumer.more_bugs;
 
-import daplumer.more_bugs.ModRegistries.ModDataRegisterer;
-import daplumer.more_bugs.ModRegistries.ModRegistries;
+import daplumer.modregisterer.ModRegistries.ModDataRegisterer;
+import daplumer.modregisterer.ModRegistries.ModRegistries;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -23,42 +23,42 @@ class Registries extends ModRegistries {
      */
     static final String namespace = "more_bugs";
     /**
-     * The general registerer for item creation. Member of the {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
+     * The general registerer for item creation. Member of the {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
      * @implNote Documentation on general data registration can be found in the
-     * {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register} method of the
-     * {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register(name, instanceSettings, instanceFactory)
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object) register(name, instanceSettings)
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String) register(name)
+     * {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register} method of the
+     * {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register(name, instanceSettings, instanceFactory)
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object) register(name, instanceSettings)
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String) register(name)
      * @see ModDataRegisterer
      * @see ModRegistries
      * @see ModRegistries#ITEM_REGISTERER_CONSTRUCTOR
      */
     static final ModDataRegisterer<Item, Item.Settings>                           ITEMS =       ITEM_REGISTERER_CONSTRUCTOR.      apply(namespace);
     /**
-     * The general registerer for block creation. Member of the {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
+     * The general registerer for block creation. Member of the {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
      * @implNote Documentation on general data registration can be found in the
-     * {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register} method of the
-     * {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register(name, instanceSettings, instanceFactory)
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object) register(name, instanceSettings)
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String) register(name)
+     * {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register} method of the
+     * {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register(name, instanceSettings, instanceFactory)
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object) register(name, instanceSettings)
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String) register(name)
      * @see ModDataRegisterer
      * @see ModRegistries
      * @see ModRegistries#BLOCK_REGISTERER_CONSTRUCTOR
      */
     static final ModDataRegisterer<Block, Block.Settings>                         BLOCKS =      BLOCK_REGISTERER_CONSTRUCTOR.     apply(namespace);
     /**
-     * The general registerer for item group creation. Member of the {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
+     * The general registerer for item group creation. Member of the {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
      * @implNote Documentation on general data registration can be found in the
-     * {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register} method of the
-     * {@link daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register(name, instanceSettings, instanceFactory)
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String, Object) register(name, instanceSettings)
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer#register(String) register(name)
+     * {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register} method of the
+     * {@link daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer} class.
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object, Function) register(name, instanceSettings, instanceFactory)
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String, Object) register(name, instanceSettings)
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer#register(String) register(name)
      * @see ModDataRegisterer
      * @see ModRegistries
      * @see ModRegistries#ITEM_GROUP_REGISTERER_CONSTRUCTOR
@@ -70,9 +70,9 @@ class Registries extends ModRegistries {
     static final ModDataRegisterer<RegistryKey<LootTable>,RegistryKey<LootTable>> LOOT_TABLES = LOOT_TABLE_REGISTERER_CONSTRUCTOR.apply(namespace);
     /**
      * Mod registerer for statistic registration
-     * @implNote see {@link daplumer.more_bugs.ModRegistries.ModStatTypeRegisterer ModStatTypeRegisterer} for implementation information.
-     * @see daplumer.more_bugs.ModRegistries.ModStatTypeRegisterer ModStatTypeRegisterer
-     * @see daplumer.more_bugs.ModRegistries.ModStatTypeRegisterer#register(String, StatFormatter, Function) register(name, instanceSettings, instanceFactory)
+     * @implNote see {@link daplumer.modregisterer.ModRegistries.ModStatTypeRegisterer ModStatTypeRegisterer} for implementation information.
+     * @see daplumer.modregisterer.ModRegistries.ModStatTypeRegisterer ModStatTypeRegisterer
+     * @see daplumer.modregisterer.ModRegistries.ModStatTypeRegisterer#register(String, StatFormatter, Function) register(name, instanceSettings, instanceFactory)
      * @see ModDataRegisterer
      * @see ModRegistries
      * @see ModRegistries#STAT_REGISTERER_CONSTRUCTOR
@@ -104,7 +104,7 @@ class Registries extends ModRegistries {
      * @see ModDataRegisterer#register(String, Object, Function) register(String, Object, Function)
      * @see ModRegistries
      * @see ModDataRegisterer
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
      */
     static Function<Item.Settings, Item> BLOCK_ITEM(Block block) {
         return (settings -> new BlockItem(block, settings));
@@ -113,7 +113,7 @@ class Registries extends ModRegistries {
     /**
      * Register static registerers for usage in the mod initializer.
      * @see Registries
-     * @see daplumer.more_bugs.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
+     * @see daplumer.modregisterer.ModRegistries.GeneralModDataRegisterer GeneralModDataRegisterer
      * @see ModDataRegisterer
      * @see ModRegistries
      */

@@ -1,4 +1,4 @@
-package daplumer.more_bugs.ModRegistries;
+package daplumer.modregisterer.ModRegistries;
 
 import daplumer.more_bugs.mixin.LootTableModificationMixin;
 import net.minecraft.loot.LootTable;

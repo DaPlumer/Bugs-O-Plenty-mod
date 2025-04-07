@@ -1,4 +1,4 @@
-package daplumer.more_bugs.ModRegistries;
+package daplumer.modregisterer.ModRegistries;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

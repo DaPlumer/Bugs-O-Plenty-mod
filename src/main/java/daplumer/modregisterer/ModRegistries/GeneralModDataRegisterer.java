@@ -1,4 +1,4 @@
-package daplumer.more_bugs.ModRegistries;
+package daplumer.modregisterer.ModRegistries;
 
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * This is a class made to merge most methods of different
  * data types to make updating data registration methods easier and centralize data registration methods.
- * @see daplumer.more_bugs.ModRegistries.ModDataRegisterer ModDataRegisterer
+ * @see daplumer.modregisterer.ModRegistries.ModDataRegisterer ModDataRegisterer
  * @see ModRegistries
  * @see #register(String, Object, Function)
  * @see Registry
