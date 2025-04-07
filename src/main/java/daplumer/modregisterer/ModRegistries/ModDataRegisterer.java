@@ -4,8 +4,8 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.function.Function;
+
 @SuppressWarnings("unused")
 public interface ModDataRegisterer<T,S> {
     String getNameSpace();
@@ -26,11 +26,9 @@ public interface ModDataRegisterer<T,S> {
     }
     @SuppressWarnings("rawtypes")
     RegistryKey getRegistryKey(Identifier identifier);
-
     default T register(String name, @Nullable S instanceSettings) {
         return this.register(name, instanceSettings, null);
     }
-
     default T register(String name) {
         return this.register(name, null, null);
     }

@@ -5,7 +5,6 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;

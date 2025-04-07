@@ -1,6 +1,5 @@
 package daplumer.modregisterer.ModRegistries;
 
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -9,15 +8,15 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EntityTypeRegisterer implements ModDataRegisterer<EntityType, EntityType.Builder>{
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class ModEntityTypeRegisterer implements ModDataRegisterer<EntityType, EntityType.Builder>{
     private final String namespace;
 
-    EntityTypeRegisterer(String namespace){
+    ModEntityTypeRegisterer(String namespace){
         this.namespace = namespace;
     }
     @Override
@@ -32,7 +31,7 @@ public class EntityTypeRegisterer implements ModDataRegisterer<EntityType, Entit
             logger.log(Level.SEVERE,
                     "Null instanceSettings passed into the Entity registration function");
             logger.info("Although most custom registerers under the Custom Registries library allow use of null pointers, the EntityRegisterer does not.");
-            throw new NullPointerException("Null pointers passed into the EntityTypeRegisterer.register function");
+            throw new NullPointerException("Null pointers passed into the ModEntityTypeRegisterer.register function");
         }
         return Registry.register(Registries.ENTITY_TYPE, this.getRegistryKey(name), instanceSettings.build(this.getRegistryKey(name)));
     }

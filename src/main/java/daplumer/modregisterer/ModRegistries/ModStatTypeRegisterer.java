@@ -9,10 +9,8 @@ import net.minecraft.stat.StatFormatter;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Objects;
 import java.util.function.Function;
-
 import static net.minecraft.stat.Stats.CUSTOM;
 
 /**

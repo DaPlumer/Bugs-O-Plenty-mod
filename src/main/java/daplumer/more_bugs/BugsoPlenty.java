@@ -1,10 +1,8 @@
 package daplumer.more_bugs;
 
-import daplumer.modregisterer.ModRegistries.ModRegistries;
 import daplumer.more_bugs.block.ShroomFarm;
 import daplumer.more_bugs.util.FoodComponentsBuilder;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -15,11 +13,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import static daplumer.more_bugs.Registries.*;
 
 @SuppressWarnings("unused")
-public class BugsoPlenty extends ModRegistries implements ModInitializer{
+public class BugsoPlenty implements ModInitializer{
 	public static final String MOD_ID = "more_bugs";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final String NAME = "Bugs o' Plenty";
